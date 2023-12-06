@@ -63,6 +63,9 @@ export const Gestiones: ModelDefined<
     descripcion: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    tipo: {
+      type: DataTypes.STRING
     }
   },
   {
