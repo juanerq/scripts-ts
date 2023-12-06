@@ -6,8 +6,8 @@ const SCHEMA = 'cbpo_colpatria_wiser'
 
 export default async function uploadManagementsSco () {
 
-  let offset = 6250000
-  const limit = 100000
+  let offset = 6550000
+  const limit = 500
 
   console.log('🚀 Start...');
   
