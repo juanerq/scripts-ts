@@ -2,6 +2,8 @@ import mysql from '../db/mysql'
 import { gestionesScotia } from '../querys/gestiones-scotia'
 import { GestionCreationAttributes, Gestiones } from '../models/index'
 
+const SCHEMA = 'cbpo_colpatria_wiser'
+
 export default async function uploadManagementsSco () {
 
   let offset = 0
@@ -23,7 +25,7 @@ export default async function uploadManagementsSco () {
 
     console.log(gestiones[0]);
 
-    await Gestiones.bulkCreate(gestiones, {
+    await Gestiones.schema(SCHEMA).bulkCreate(gestiones, {
       ignoreDuplicates: true
     })
       
