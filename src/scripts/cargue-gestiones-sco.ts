@@ -7,35 +7,30 @@ const SCHEMA = 'cbpo_colpatria_wiser'
 export default async function uploadManagementsSco () {
 
   let offset = 6603000
-  const limit = 500
+  const limit = 250000
 
   console.log('🚀 Start...');
   
 
   for(let i = 0; i <= 10000000; i+=limit) {
 
-    try {
-      const [gestiones] = await mysql.query(gestionesScotia, 
-        { 
-          raw: true, 
-          replacements: {
-            limit, offset
-          } 
-        }
-      ) as Array<GestionCreationAttributes[]>
-  
-      console.log(gestiones[0]);
-  
-      await Gestiones.schema(SCHEMA).bulkCreate(gestiones, {
-        ignoreDuplicates: true
-      })
-        
-      offset += limit
-      console.log({ offset, numGestiones: gestiones.length });
+    const [gestiones] = await mysql.query(gestionesScotia, 
+      { 
+        raw: true, 
+        replacements: {
+          limit, offset
+        } 
+      }
+    ) as Array<GestionCreationAttributes[]>
+
+    console.log(gestiones[0]);
+
+    await Gestiones.schema(SCHEMA).bulkCreate(gestiones, {
+      ignoreDuplicates: true
+    })
       
-    } catch (error) {
-      console.log(error);
-    }
+    offset += limit
+    console.log({ offset, numGestiones: gestiones.length });
 
   }
   
